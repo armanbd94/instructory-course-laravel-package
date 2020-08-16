@@ -1,0 +1,23 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import '../asset/css/main.css';
+@import '../asset/css/slider.css';
+
+.bg-red{
+    background: red;
+}
+
+.bg-blue{
+    background: blue !important;
+}
+
+.bg-green{
+    background: green;
+}
