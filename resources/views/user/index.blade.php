@@ -99,6 +99,7 @@
                         <button class="btn btn-primary float-right" onclick="showModal('Add New User','Save')">Add
                             New</button>
                         <button class="btn btn-success float-right mr-2" onclick="showExcelModal('Upload File','Upload')">Upload Excel Sheet</button>
+                        <button class="btn btn-info text-white float-right mr-2" id="export-btn">Export Excel Sheet</button>
                         
                     </div>
                 </div>
@@ -371,6 +372,22 @@
 
         $('#dataTable_wrapper .dt-buttons').append('<button type="button" class="btn btn-danger" id="bulk_action_delete"> <i class="fas fa-trash"></i> Delete All</button>');
         
+        $(document).on('click','#export-btn',function(){
+            let column = '';
+            let dir    = '';
+            let start  = table.page.info().start;
+            let length  = table.page.len();
+            if(table.order().length == 1){
+                column = table.order()[0][0];
+                dir    = table.order()[0][1];
+            }
+            let query = {start:start, length:length, column: column, dir:dir}
+            // console.log(table.page.info());
+            // console.log(table.page.len());
+            // console.log(table.order());
+            let url = "{{url('export-excel-file')}}?"+$.param(query);
+            window.open(url,'_blank');
+        });
     });
 
 

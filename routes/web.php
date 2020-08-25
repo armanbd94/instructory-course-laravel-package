@@ -50,6 +50,24 @@ Route::group(['prefix' => 'user', 'as'=>'user.'], function () {
  * * Begin :: Excel Route **
 ******************************/
 Route::post('upload-excel-file', 'ExcelFileUploadController@index')->name('upload.excel.file');
+Route::get('export-excel-file', 'ExcelFileUploadController@export')->name('export.excel.file');
+
 /*****************************
  * * End :: Excel Route **
+******************************/
+
+/*****************************
+ * * Begin :: Socialite Route **
+******************************/
+Route::view('customer-login','customer-login');
+
+Route::get('customer-login/{provider}', 'CustomerLoginController@redirectToProvider');
+Route::get('customer-login/{provider}/callback', 'CustomerLoginController@handleProviderCallback');
+
+Route::group(['middleware' => ['auth:customer']], function () {
+    Route::view('customer-profile','customer-profile');
+    Route::post('customer-logout', 'CustomerLoginController@logout');
+});
+/*****************************
+ * * Begin :: Socialite Route **
 ******************************/
